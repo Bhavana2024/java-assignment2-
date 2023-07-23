@@ -1,0 +1,74 @@
+package grade;
+
+	import java.util.HashSet;
+	import java.util.Scanner;
+
+	class ListNode {
+	    int val;
+	    ListNode next;
+
+	    ListNode(int val) {
+	        this.val = val;
+	        this.next = null;
+	    }
+	}
+
+	public class removeduplicates{
+
+	    public static ListNode removeDuplicates(ListNode head) {
+	        if (head == null) {
+	            return null;
+	        }
+
+	        HashSet<Integer> uniqueValues = new HashSet<>();
+	        ListNode current = head;
+	        ListNode prev = null;
+
+	        while (current != null) {
+	            if (!uniqueValues.contains(current.val)) {
+	                uniqueValues.add(current.val);
+	                prev = current;
+	            } else {
+	                prev.next = current.next;
+	            }
+	            current = current.next;
+	        }
+
+	        return head;
+	    }
+
+	    public static void printLinkedList(ListNode head) {
+	        ListNode current = head;
+	        while (current != null) {
+	            System.out.print(current.val + "->");
+	            current = current.next;
+	        }
+	        System.out.println("null");
+	    }
+
+	    public static void main(String[] args) {
+	        Scanner scanner = new Scanner(System.in);
+
+	        System.out.print("Enter the number of elements in list: ");
+	        int n = scanner.nextInt();
+
+	        System.out.println("Enter the elements of list:");
+	        ListNode head = new ListNode(scanner.nextInt());
+	        ListNode current = head;
+	        for(int i = 1; i < n; i++) {
+	            current.next = new ListNode(scanner.nextInt());
+	            current = current.next;
+	        }
+
+	        scanner.close();
+
+	        System.out.println("enter elemnts before removing duplicates: ");
+	        printLinkedList(head);
+
+	        ListNode uniqueList = removeDuplicates(head);
+
+	        System.out.println("enter elements after removing duplicates: ");
+	        printLinkedList(uniqueList);
+	    }
+	}
+
