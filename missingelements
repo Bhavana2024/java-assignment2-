@@ -1,0 +1,38 @@
+package grade;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class missingnumber{
+    public static List<Integer> findMissingNumbers(int[] arrNum) {
+        List<Integer> missingNumbers = new ArrayList<>();
+
+        int expectedNum = arrNum[0];
+        for (int num : arrNum) {
+            while (num != expectedNum) {
+                missingNumbers.add(expectedNum);
+                expectedNum++;
+            }
+            expectedNum++;
+        }
+
+        return missingNumbers;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the number of elements in the array: ");
+        int n = scanner.nextInt();
+        int[] arrNum = new int[n];
+
+        System.out.println("Enter the elements of the array (consecutive integers):");
+        for (int i = 0; i < n; i++) {
+            arrNum[i] = scanner.nextInt();
+        }
+
+        List<Integer> missingNumbers = findMissingNumbers(arrNum);
+        System.out.println("Missing numbers in the array:");
+        System.out.println(missingNumbers);
+    }
+}
